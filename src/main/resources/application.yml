@@ -1,0 +1,59 @@
+spring:
+  application:
+   name: ecommerce-app
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+  datasource:
+    url: jdbc:postgresql://${POST_SERVICE}:${POST_PORT}/${POST_DB}
+    username: ${POST_USER}
+    password: ${POST_PASS}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+      hibernate:
+        ddl-auto: ${DDL_AUTO:create-drop}  # or validate/create/drop/create-drop
+      show-sql: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    verify-email-url: ${VERIFY_EMAIL_URL} #my custom prop
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          charset: UTF-8
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          timeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+server:
+  port: ${APP_PORT:8080}
+
+#custom config
+custom:
+  populate: #initially populate data
+    data: true
+  jwt:
+    secret: ${JWT_SECRET}
+    access_exp: ${JWT_ACCESS_EXP}
+    refresh_exp: ${JWT_REFRESH_EXP}
+  admin: # admin user
+    admin_user: ${ADMIN_USER}
+    admin_password: ${ADMIN_PASSWORD}
+    admin_roles: ${ADMIN_ROLES}
+  demo: #demo user
+    demo_user: ${DEMO_USER}
+    demo_password: ${DEMO_PASSWORD}
+    demo_role: ${DEMO_ROLE}
+
+  cors: ${WEBSITE_URLS} #websites allowed

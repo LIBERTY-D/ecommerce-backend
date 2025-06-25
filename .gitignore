@@ -1,0 +1,40 @@
+# Ignore helper docs
+HELP.md
+
+# Maven output
+target/
+
+# Maven Wrapper - Keep everything except the .jar
+.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+## IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+## STS (Spring Tool Suite)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+## NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+## VS Code
+.vscode/
+
+# Gradle output (if used)
+build/
+
+# Environment / secret config files
+.env

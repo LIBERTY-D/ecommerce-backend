@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${subject}">Purchase Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f9fc;
+            padding: 20px;
+        }
+
+        .email-container {
+            background-color: #ffffff;
+            max-width: 650px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .product-img {
+            max-height: 60px;
+            max-width: 60px;
+            border-radius: 5px;
+            object-fit: contain;
+        }
+
+        .total {
+            font-weight: bold;
+            text-align: right;
+            padding-top: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <h2 th:text="${title}">Thank You for Your Purchase!</h2>
+    <p th:text="'Hi ' + ${username} + ','">Hello Customer,</p>
+    <p th:text="${message}">
+        Here’s what you purchased:
+    </p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td><img th:src="${item.imageUrl}" class="product-img" alt="Image"/></td>
+            <td th:text="${item.name}">Product Name</td>
+            <td th:text="${item.qty}">1</td>
+            <td th:text="${item.price} + ' USD'">799.99 USD</td>
+            <td th:text="${item.totalPrice} + ' USD'">1599.98 USD</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="total" th:text="'Total Amount: ' + ${total} + ' USD'">Total: 1599.98 USD</p>
+
+<!--    <div th:if="${buttonUrl}">-->
+<!--        <a class="btn" th:href="${buttonUrl}" th:text="${buttonText}">View Your Order</a>-->
+<!--    </div>-->
+
+    <div class="footer" th:text="${footerText}">
+        Questions? Contact liberta@example.com
+    </div>
+</div>
+</body>
+</html>
