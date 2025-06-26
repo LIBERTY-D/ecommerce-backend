@@ -114,7 +114,6 @@ public class UserController extends BaseController implements Controller<UserDto
 
     @PatchMapping("users/admin/{id}")
     public ResponseEntity<HttpResponse<UserResponseDto>> updateUserAdmin(@PathVariable Long id,@Valid @RequestBody() UserAdminDto adminDto) {
-        System.out.println(adminDto);
         UserResponseDto user =  userServiceImp.updateUserAdmin(id,adminDto);
         HttpResponse<UserResponseDto> response =
                 HttpResponse.<UserResponseDto>builder()

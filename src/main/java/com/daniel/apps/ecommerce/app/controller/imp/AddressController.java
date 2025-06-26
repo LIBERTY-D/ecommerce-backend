@@ -5,7 +5,6 @@ import com.daniel.apps.ecommerce.app.dto.address.AddressDto;
 import com.daniel.apps.ecommerce.app.http.HttpResponse;
 import com.daniel.apps.ecommerce.app.model.Address;
 import com.daniel.apps.ecommerce.app.service.imp.AddressServiceImp;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
