@@ -75,30 +75,30 @@ Create a `.env` file in the root directory with the following variables:
 ### 🧪 Sample `application-dev.yml`
 
 ```yaml
-POST_USER=your_db_user
-POST_PASS=your_db_password
-POST_DB=ecommerce_db
-POST_PORT=5432
-POST_SERVICE=postgres
+POST_USER: your_db_user
+POST_PASS: your_db_password
+POST_DB: ecommerce_db
+POST_PORT: 5432
+POST_SERVICE: postgres
 
-APP_PORT=8080
-APP_HOST=localhost
-APP_SECURE=http
+APP_PORT: 8080
+APP_HOST: localhost
+APP_SECURE: http
 
-MAIL_PORT=587
-MAIL_HOST=smtp.mailtrap.io
-MAIL_USERNAME=your_mail_username
-MAIL_PASSWORD=your_mail_password
-VERIFY_EMAIL_URL=http://localhost:8080/api/v1/users/verify
+MAIL_PORT: 587
+MAIL_HOST: smtp.mailtrap.io
+MAIL_USERNAME: your_mail_username
+MAIL_PASSWORD: your_mail_password
+VERIFY_EMAIL_URL: http://localhost:8080/api/v1/users/verify
 
-JWT_SECRET=your_jwt_secret_key
-JWT_ACCESS_EXP=900000
-JWT_REFRESH_EXP=604800000
+JWT_SECRET: your_jwt_secret_key
+JWT_ACCESS_EXP: 900000
+JWT_REFRESH_EXP: 604800000
 
-ADMIN_USER=admin@example.com
-ADMIN_PASSWORD=adminpassword
-ADMIN_ROLES=ROLE_ADMIN,ROLE_DEMO
-DDL_AUTO=update
+ADMIN_USER: admin@example.com
+ADMIN_PASSWORD: adminpassword
+ADMIN_ROLES: ROLE_ADMIN,ROLE_DEMO
+DDL_AUTO: update
 ```
 
 ## Docker Compose Setup
@@ -178,7 +178,7 @@ You can start the e-commerce backend using a simple script or manually with Dock
 
 ---
 
-### ✅ Recommended: Use the `.prod.sh` Script
+### ✅ Recommended: Use the `prod.sh` Script
 
 After building your project with Maven:
 
@@ -191,14 +191,14 @@ This script will:
 - Use Docker Compose to spin up all required services
 - Build and start the application in production mode
 
-> **Note:** Make sure the `.prod.sh` script is executable. If not, run:
+> **Note:** Make sure the `prod.sh` script is executable. If not, run:
 >
 > ```bash
 > chmod +x .prod.sh
 > ```
 ## 🛠 Alternative: Manual Docker Compose Command
 
-If you prefer running the application manually without the `.prod.sh` script:
+If you prefer running the application manually without the `prod.sh` script:
 
 ```bash
 ENV_FILE=.env docker-compose --env-file .env up --build
