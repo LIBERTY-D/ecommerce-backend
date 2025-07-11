@@ -1,0 +1,71 @@
+services:
+  - type: web
+    name: ecommerce-backend
+    env: docker
+    repo: https://github.com/LIBERTY-D/ecommerce-backend.git
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      # Spring Profile
+      - key: ACTIVE_PROFILE
+        value: prod
+
+      # Database connection info (external DB)
+      - key: POST_SERVICE
+        value: your-db-host.example.com
+      - key: POST_PORT
+        value: "5432"
+      - key: POST_DB
+        value: your_database_name
+      - key: POST_USER
+        value: your_database_user
+      - key: POST_PASS
+        value: your_database_password
+
+      # Server Port
+      - key: APP_PORT
+        value: "8080"
+
+      # JPA / Hibernate
+      - key: DDL_AUTO
+        value: update
+
+      # Mail Settings
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        value: your-email@gmail.com
+      - key: MAIL_PASSWORD
+        value: your-email-password
+      - key: VERIFY_EMAIL_URL
+        value: https://yourfrontend.com/verify
+
+      # JWT
+      - key: JWT_SECRET
+        value: your_jwt_secret
+      - key: JWT_ACCESS_EXP
+        value: "3600"
+      - key: JWT_REFRESH_EXP
+        value: "604800"
+
+      # Admin user
+      - key: ADMIN_USER
+        value: admin@example.com
+      - key: ADMIN_PASSWORD
+        value: strongadminpassword
+      - key: ADMIN_ROLES
+        value: ROLE_ADMIN
+
+      # Demo user
+      - key: DEMO_USER
+        value: demo@example.com
+      - key: DEMO_PASSWORD
+        value: demopassword
+      - key: DEMO_ROLE
+        value: ROLE_USER
+
+      # CORS
+      - key: WEBSITE_URLS
+        value: https://yourfrontend.com,https://admin.yourfrontend.com
