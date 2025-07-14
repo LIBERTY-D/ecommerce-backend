@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -31,7 +32,7 @@ public class InitializeDb implements CommandLineRunner {
     private final AddressRepository addressRepository;
     private final PasswordEncoder passwordEncoder;
     private final AdminUserProperties adminUserProperties;
-    private  final DemoUserProperties demoUserProperties;
+    private final DemoUserProperties demoUserProperties;
 
     @Override
     @Transactional
@@ -42,21 +43,48 @@ public class InitializeDb implements CommandLineRunner {
         categoryRepository.saveAll(SampleDataFactory.createCategories());
         productRepository.saveAll(SampleDataFactory.createSampleProducts());
 
-        User adminUser= new User(
-                "super",
-                "sudo",
-                adminUserProperties.getAdmin_user(),
-                passwordEncoder.encode(adminUserProperties.getAdmin_password()),
-                adminUserProperties.getAdminRolesAsEnumSet(),true
-        );
-        User demoUser = new User(
-                "super",
-                "sudo",
-                demoUserProperties.getDemo_user(),
-                passwordEncoder.encode(demoUserProperties.getDemo_password()),
-                Set.of(demoUserProperties.role()),true
-        );
-        userRepository.saveAll(List.of(demoUser,adminUser));
+        Optional<User> opAdminUser = userRepository.findUserByEmail(adminUserProperties.getAdmin_user());
+
+        Optional<User> opDemoUser =
+                userRepository.findUserByEmail(demoUserProperties.getDemo_user());
+        if (opAdminUser.isEmpty() && opDemoUser.isEmpty()) {
+            log.info("POPULATING USERS IN DB");
+
+            User demoUser = new User(
+                    "super",
+                    "sudo",
+                    demoUserProperties.getDemo_user(),
+                    passwordEncoder.encode(demoUserProperties.getDemo_password()),
+                    Set.of(demoUserProperties.role()), true
+            );
+            User adminUser = new User(
+                    "super",
+                    "sudo",
+                    adminUserProperties.getAdmin_user(),
+                    passwordEncoder.encode(adminUserProperties.getAdmin_password()),
+                    adminUserProperties.getAdminRolesAsEnumSet(), true
+            );
+            userRepository.saveAll(List.of(demoUser, adminUser));
+
+        } else {
+            log.info("CREATING USERS IN DB");
+
+            User demoUser = new User(
+                    "super",
+                    "sudo",
+                    demoUserProperties.getDemo_user(),
+                    passwordEncoder.encode(demoUserProperties.getDemo_password()),
+                    Set.of(demoUserProperties.role()), true
+            );
+            User adminUser = new User(
+                    "super",
+                    "sudo",
+                    adminUserProperties.getAdmin_user(),
+                    passwordEncoder.encode(adminUserProperties.getAdmin_password()),
+                    adminUserProperties.getAdminRolesAsEnumSet(), true
+            );
+            userRepository.saveAll(List.of(demoUser, adminUser));
+        }
 
 
     }
