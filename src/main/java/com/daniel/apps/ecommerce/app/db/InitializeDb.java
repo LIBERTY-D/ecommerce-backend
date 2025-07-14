@@ -38,10 +38,7 @@ public class InitializeDb implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
-        log.info("POPULATING DATA IN DB");
 
-        categoryRepository.saveAll(SampleDataFactory.createCategories());
-        productRepository.saveAll(SampleDataFactory.createSampleProducts());
 
         Optional<User> opAdminUser = userRepository.findUserByEmail(adminUserProperties.getAdmin_user());
 
@@ -84,6 +81,9 @@ public class InitializeDb implements CommandLineRunner {
                     adminUserProperties.getAdminRolesAsEnumSet(), true
             );
             userRepository.saveAll(List.of(demoUser, adminUser));
+            log.info("POPULATING DATA IN DB");
+            categoryRepository.saveAll(SampleDataFactory.createCategories());
+            productRepository.saveAll(SampleDataFactory.createSampleProducts());
         }
 
 
