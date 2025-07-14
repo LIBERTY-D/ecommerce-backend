@@ -38,8 +38,6 @@ public class InitializeDb implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
-
-
         Optional<User> opAdminUser = userRepository.findUserByEmail(adminUserProperties.getAdmin_user());
 
         Optional<User> opDemoUser =
@@ -63,28 +61,27 @@ public class InitializeDb implements CommandLineRunner {
             );
             userRepository.saveAll(List.of(demoUser, adminUser));
 
-        } else {
-            log.info("CREATING USERS IN DB");
-
-            User demoUser = new User(
-                    "super",
-                    "sudo",
-                    demoUserProperties.getDemo_user(),
-                    passwordEncoder.encode(demoUserProperties.getDemo_password()),
-                    Set.of(demoUserProperties.role()), true
-            );
-            User adminUser = new User(
-                    "super",
-                    "sudo",
-                    adminUserProperties.getAdmin_user(),
-                    passwordEncoder.encode(adminUserProperties.getAdmin_password()),
-                    adminUserProperties.getAdminRolesAsEnumSet(), true
-            );
-            userRepository.saveAll(List.of(demoUser, adminUser));
-            log.info("POPULATING DATA IN DB");
-            categoryRepository.saveAll(SampleDataFactory.createCategories());
-            productRepository.saveAll(SampleDataFactory.createSampleProducts());
         }
+        log.info("CREATING USERS IN DB");
+
+        User demoUser = new User(
+                "super",
+                "sudo",
+                demoUserProperties.getDemo_user(),
+                passwordEncoder.encode(demoUserProperties.getDemo_password()),
+                Set.of(demoUserProperties.role()), true
+        );
+        User adminUser = new User(
+                "super",
+                "sudo",
+                adminUserProperties.getAdmin_user(),
+                passwordEncoder.encode(adminUserProperties.getAdmin_password()),
+                adminUserProperties.getAdminRolesAsEnumSet(), true
+        );
+        userRepository.saveAll(List.of(demoUser, adminUser));
+        log.info("POPULATING DATA IN DB");
+        categoryRepository.saveAll(SampleDataFactory.createCategories());
+        productRepository.saveAll(SampleDataFactory.createSampleProducts());
 
 
     }
