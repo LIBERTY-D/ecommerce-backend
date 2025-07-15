@@ -62,23 +62,7 @@ public class InitializeDb implements CommandLineRunner {
             userRepository.saveAll(List.of(demoUser, adminUser));
 
         }
-        log.info("CREATING USERS IN DB");
 
-        User demoUser = new User(
-                "super",
-                "sudo",
-                demoUserProperties.getDemo_user(),
-                passwordEncoder.encode(demoUserProperties.getDemo_password()),
-                Set.of(demoUserProperties.role()), true
-        );
-        User adminUser = new User(
-                "super",
-                "sudo",
-                adminUserProperties.getAdmin_user(),
-                passwordEncoder.encode(adminUserProperties.getAdmin_password()),
-                adminUserProperties.getAdminRolesAsEnumSet(), true
-        );
-        userRepository.saveAll(List.of(demoUser, adminUser));
         log.info("POPULATING DATA IN DB");
         categoryRepository.saveAll(SampleDataFactory.createCategories());
         productRepository.saveAll(SampleDataFactory.createSampleProducts());
