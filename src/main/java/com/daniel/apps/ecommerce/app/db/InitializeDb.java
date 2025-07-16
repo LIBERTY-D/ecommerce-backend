@@ -60,12 +60,13 @@ public class InitializeDb implements CommandLineRunner {
                     adminUserProperties.getAdminRolesAsEnumSet(), true
             );
             userRepository.saveAll(List.of(demoUser, adminUser));
+            log.info("POPULATING DATA IN DB");
+            categoryRepository.saveAll(SampleDataFactory.createCategories());
+            productRepository.saveAll(SampleDataFactory.createSampleProducts());
 
         }
 
-        log.info("POPULATING DATA IN DB");
-        categoryRepository.saveAll(SampleDataFactory.createCategories());
-        productRepository.saveAll(SampleDataFactory.createSampleProducts());
+
 
 
     }
